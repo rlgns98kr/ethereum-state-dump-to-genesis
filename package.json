@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "name": "ethereum-state-dump-to-genesis",
+  "version": "1.0.0",
+  "description": "tool to create ethereum genesis file from state dump",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rlgns98kr/ethereum-state-dump-to-genesis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rlgns98kr/ethereum-state-dump-to-genesis/issues"
+  },
+  "homepage": "https://github.com/rlgns98kr/ethereum-state-dump-to-genesis#readme",
+  "dependencies": {
+    "cli-flags": "^2.0.7",
+    "load-json-file": "^7.0.1"
+  }
+}
