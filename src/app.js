@@ -1,27 +1,34 @@
-import { loadJsonFile } from "load-json-file";
+import { loadJsonFileSync } from "load-json-file";
+import { writeJsonFileSync } from "write-json-file";
 import CLI from "cli-flags";
 
-async function main() {
+function main() {
   const { flags } = CLI.parse({
     flags: {
-      "input-file": CLI.flags.string({ char: "i", required: true }),
-      "output-file": CLI.flags.string({ char: "o", required: true }),
+      "input-genesis-file": CLI.flags.string({ char: "g", required: true }),
+      "input-state-dump-file": CLI.flags.string({ char: "s", required: true }),
+      "output-genesis-file": CLI.flags.string({ char: "o", required: true }),
     },
   });
 
-  const inputData = await loadJsonFile(flags["input-file"]);
-  const outputData = query(inputData);
+  const inputGenesis = loadJsonFileSync(flags["input-genesis-file"]);
+  const inputStateDump = loadJsonFileSync(flags["input-state-dump-file"]);
 
-  console.log(outputData);
+  const outputAllocData = getAllocData(inputStateDump);
+  const outputGenesis = inputGenesis;
+  outputGenesis["alloc"] = outputAllocData;
+
+  writeJsonFileSync(flags["output-genesis-file"], outputGenesis);
 }
 
-function query(data) {
+function getAllocData(data) {
   var newData = {};
-  const allowed = ["balance", "code", "storage"];
 
   const filtered = Object.keys(data.accounts);
-
   filtered.forEach((accounts_key) => {
+    if (!data.accounts[accounts_key]["storage"])
+      data.accounts[accounts_key]["storage"] = new Object();
+
     Object.keys(data.accounts[accounts_key]).forEach((key) => {
       var tempData;
       switch (key) {

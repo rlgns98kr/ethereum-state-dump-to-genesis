@@ -19,6 +19,7 @@
   "homepage": "https://github.com/rlgns98kr/ethereum-state-dump-to-genesis#readme",
   "dependencies": {
     "cli-flags": "^2.0.7",
-    "load-json-file": "^7.0.1"
+    "load-json-file": "^7.0.1",
+    "write-json-file": "^5.0.0"
   }
 }
