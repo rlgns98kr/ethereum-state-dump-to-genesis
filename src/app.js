@@ -45,6 +45,9 @@ function getAllocData(data) {
         case "code":
           tempData = "0x" + data.accounts[accounts_key][key];
           break;
+        case "nonce":
+          tempData = String(data.accounts[accounts_key][key]);
+          break;
         default:
           return;
       }
